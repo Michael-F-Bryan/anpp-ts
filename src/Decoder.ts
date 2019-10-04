@@ -41,6 +41,11 @@ export default class Decoder {
         this.bufferLength += data.length;
     }
 
+    public pushPacket(pkt: Packet) {
+        const rest = this.buffer.subarray(this.bufferLength);
+        this.bufferLength += pkt.writeTo(rest);
+    }
+
     /**
      * Try to decode a packet and remove it from the internal buffer.
      */

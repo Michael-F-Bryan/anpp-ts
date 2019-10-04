@@ -25,6 +25,10 @@ export default class Packet {
     }
 
     public writeTo(buffer: Uint8Array): number {
+        if (buffer.length < this.totalLength) {
+            throw new Error(`${this.totalLength} bytes required but only ${buffer.length} available`);
+        }
+
         const crc = calculateCRC16(this.body);
         buffer[1] = this.id;
         buffer[2] = this.contentLength;
@@ -41,5 +45,19 @@ export default class Packet {
         const buffer = new Uint8Array(this.totalLength);
         this.writeTo(buffer);
         return buffer;
+    }
+
+    public equals(other: Packet): boolean {
+        if (this.id != other.id || this.contentLength != other.contentLength) {
+            return false;
+        }
+
+        for (let i = 0; i < this.contentLength; i++) {
+            if (this.body[i] != other.body[i]) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
