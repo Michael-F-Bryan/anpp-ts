@@ -1,0 +1,19 @@
+{
+  "name": "anpp",
+  "version": "1.0.0",
+  "description": "A TypeScript port of the Advanced Navigation Packet Protocol",
+  "main": "src/index.ts",
+  "author": "Michael Bryan <michaelfbryan@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "lint": "tslint --project tsconfig.json",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "typescript": "^3.6.3"
+  }
+}
