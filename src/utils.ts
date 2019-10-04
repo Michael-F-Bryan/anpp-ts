@@ -1,13 +1,17 @@
 export function calculateHeaderLRC(buffer: Uint8Array): number {
+    if (buffer.length !== 4) {
+        throw new Error(`Expected 4 bytes but found ${buffer.length}`);
+    }
 
-    return (((buffer[0] + buffer[1] + buffer[2] + buffer[3]) ^ 0xFF) + 1);
+    return (((buffer[0] + buffer[1] + buffer[2] + buffer[3]) ^ 0xFF) + 1) & 0xff;
 }
 
 export function calculateCRC16(buffer: Uint8Array): number {
     let crc = 0xffff;
 
     for (let i = 0; i < buffer.length; i++) {
-        crc = ((crc << 8) ^ CRC16Table[((crc >> 8) ^ buffer[i]) & 0xFF]) & 0xFFFF;
+        const ix = ((crc >> 8) ^ buffer[i]) & 0xFF;
+        crc = ((crc << 8) ^ CRC16Table[ix]) & 0xFFFF;
     }
 
     return crc;

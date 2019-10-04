@@ -1,6 +1,6 @@
-const HeaderSize = 5;
-const MaxPacketSize = 255;
-const DecoderBufferSize = 8 * (MaxPacketSize + HeaderSize);
+export const HeaderSize = 5;
+export const MaxPacketSize = 255;
+export const DecoderBufferSize = 8 * (MaxPacketSize + HeaderSize);
 
 export default class Decoder {
     private buffer: Uint8Array = new Uint8Array(DecoderBufferSize);
