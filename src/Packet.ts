@@ -28,7 +28,7 @@ export default class Packet {
         const crc = calculateCRC16(this.body);
         buffer[1] = this.id;
         buffer[2] = this.contentLength;
-        buffer[3] = crc && 0xff;
+        buffer[3] = crc & 0xff;
         buffer[4] = (crc >> 8) & 0xff;
         buffer[0] = calculateHeaderLRC(buffer.subarray(1, 5));
 
