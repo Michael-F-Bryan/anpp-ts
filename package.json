@@ -2,9 +2,11 @@
   "name": "anpp",
   "version": "1.0.0",
   "description": "A TypeScript port of the Advanced Navigation Packet Protocol",
-  "main": "src/index.ts",
   "author": "Michael Bryan <michaelfbryan@gmail.com>",
   "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "prepublish": "tsc",
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
