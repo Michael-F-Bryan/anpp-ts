@@ -6,14 +6,14 @@
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "prepublish": "tsc",
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
     "lint": "tslint --project tsconfig.json",
     "test": "jest",
     "test:watch": "jest --watch",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "prepublish": "tsc"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
