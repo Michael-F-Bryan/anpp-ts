@@ -15,14 +15,18 @@ export interface ChecksumFailed {
 
 export default class Decoder {
     private buffer: Uint8Array = new Uint8Array(DecoderBufferSize);
-    private bufferLength: number = 0;
+    private _bufferLength: number = 0;
     private checksumFailures: ChecksumFailedCallback[] = [];
 
     /**
      * How many more bytes can be added before the decoder's buffer is full?
      */
     public get remainingCapacity(): number {
-        return this.buffer.length - this.bufferLength;
+        return this.buffer.length - this._bufferLength;
+    }
+
+    public get bufferLength(): number {
+        return this._bufferLength;
     }
 
     /**
@@ -38,12 +42,12 @@ export default class Decoder {
             this.buffer[this.bufferLength + i] = data[i];
         }
 
-        this.bufferLength += data.length;
+        this._bufferLength += data.length;
     }
 
     public pushPacket(pkt: Packet) {
         const rest = this.buffer.subarray(this.bufferLength);
-        this.bufferLength += pkt.writeTo(rest);
+        this._bufferLength += pkt.writeTo(rest);
     }
 
     /**
@@ -86,10 +90,10 @@ export default class Decoder {
         if (decodeIterator < this.bufferLength) {
             if (decodeIterator > 0) {
                 this.buffer.copyWithin(0, decodeIterator);
-                this.bufferLength -= decodeIterator;
+                this._bufferLength -= decodeIterator;
             }
         } else {
-            this.bufferLength = 0;
+            this._bufferLength = 0;
         }
 
         return decoded;
