@@ -3,6 +3,10 @@
   "version": "1.0.3",
   "description": "A TypeScript port of the Advanced Navigation Packet Protocol",
   "author": "Michael Bryan <michaelfbryan@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Michael-F-Bryan/anpp-ts"
+  },
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
